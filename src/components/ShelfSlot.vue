@@ -12,17 +12,29 @@ export default {
   name: "ShelfSlot",
   props: ['ingredient', 'quantity'],
   emits: ['onClick'],
-  setup(props) {
+  setup(props, { emit }) {
     let amount = ref(props.quantity);
+    let ingredient = ref(props.ingredient);
+
+    const click = () => {
+      if (ingredient.value == null) {
+        return;
+      }
+
+      if (amount.value - 1 <= 0) {
+        ingredient.value = null;
+      }
+
+      amount.value -= 1;
+
+      emit('onClick', props.ingredient);
+    }
 
     return {
-      amount
+      amount,
+
+       click
     };
-  },
-  methods: {
-    click() {
-      this.$emit('onClick', this.$props.ingredient);
-    }
   }
 }
 </script>
@@ -32,9 +44,8 @@ export default {
   display: flex;
   width: 80px;
   height: 80px;
-  background: red;
   position: relative;
-  color: white;
+  color: black;
   border-radius: 10px;
   border: 3px solid grey;
   margin: 20px;
@@ -49,7 +60,7 @@ export default {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: blue;
+    background: indianred;
     color: white;
     font-weight: bold;
     align-items: center;

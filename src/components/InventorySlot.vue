@@ -1,7 +1,7 @@
 <template>
   <div class="inventory-slot">
-    <span class="counter">{{ amount }}</span>
     {{ ingredient?.name }}
+    <div v-if="ingredient?.prepared">({{ ingredient?.type }})</div>
   </div>
 </template>
 
@@ -24,30 +24,15 @@ export default {
 <style lang="scss" scoped>
 .inventory-slot {
   display: flex;
+  flex-direction: column;
   width: 80px;
   height: 80px;
-  background: red;
   position: relative;
-  color: white;
+  color: black;
   border-radius: 10px;
   border: 3px solid grey;
   margin: 20px;
   align-items: center;
   justify-content: center;
-
-.counter {
-  display: flex;
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: blue;
-  color: white;
-  font-weight: bold;
-  align-items: center;
-  justify-content: center;
-}
 }
 </style>
